@@ -6,6 +6,13 @@
 
 # Link Ref
 
+https://static.fullstack-bootcamp.com/fullstack-ground/module-10/circle.svg - example
+https://en.wikipedia.org/wiki/SVG - about
+https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial - tut
+https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Basic_Shapes - basic shapes in svg
+https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Texts -text in svg
+https://marketplace.visualstudio.com/items?itemName=jock.svg - donload svg
+
 # User Story
 
 AS a freelance web developer
