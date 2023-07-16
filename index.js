@@ -19,7 +19,7 @@ const questions = [
         message: "Enter a color keyword or hexixidecimal number for your text color:",
     },
     { //WHEN I am prompted for a shape...THEN I am presented with a list of shapes to choose from: circle, triangle, and square
-         type: "input",
+        type: "list",
         name: "logoShape",
         message: "Select your logo shape:",
         choices: ["triangle", "square", "circle",]
@@ -28,12 +28,22 @@ const questions = [
         type: "input",
         name: "logoColor",
         message: "Enter a color or hexidecimal number for your logo color:",
-    };
-};
+    },
+]
 //WHEN I have entered input for all the prompts...THEN an SVG file is created named `logo.svg`
 function writetoFile(fileName, data) {
-    var content = generateLogo
+    var content = generateLogo(data);
+    fs.writeFile(filenaame, content, function(error) {
+        if(error) {
+            return console.log(error);
+        };
+    });
+//AND the output text "Generated logo.svg" is printed in the command line.
+function init( {
+    inquirer.prompt(questions).then(function (data)) {
+        var fileName "logo.svg";
+        writetoFile(fileName, data);
+    });
 }
-AND the output text "Generated logo.svg" is printed in the command line
-WHEN I open the `logo.svg` file in a browser
-THEN I am shown a 300x200 pixel image that matches the criteria I entered
+//function call to app
+init();
