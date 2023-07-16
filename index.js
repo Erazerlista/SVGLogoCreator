@@ -1,49 +1,78 @@
-const fs = require('fs');
 const inquirer = require('inquirer');
-const path = require('path');
-const {generateSVG, makeShape} = requier('./lib/makeSVG');
-
-
-//WHEN I am prompted for text...
+const fs = require('fs');
+const { Shape, Triangle, Circle, Square } = require('./lib/shapes.js');
 
 const questions = [
-    {//THEN I can enter up to three characters.
-        type: "input",
-        name: "text",
-        message: "Enter up to 3 chatacters for your logo text:",
-    },
-    {//WHEN I am prompted for the text color. THEN I can enter a color keyword (OR a hexadecimal number).
+  {
+    type: "input",
+    name: "text",
+    message: "Enter up to 3 characters for your logo text:",
+    validate: (input) => input.length <= 3 || 'Please enter up to 3 characters.',
+  },
+  {
+    type: "input",
+    name: "textColor",
+    message: "Enter a color keyword or hexadecimal number for your text color:",
+    default: "black",
+  },
+  {
+    type: "list",
+    name: "logoShape",
+    message: "Select your logo shape:",
+    choices: ["triangle", "square", "circle"],
+  },
+  {
+    type: "input",
+    name: "logoColor",
+    message: "Enter a color or hexadecimal number for your logo color:",
+    default: "blue",
+  },
+];
 
-        type: "input",
-        name: "textColor",
-        message: "Enter a color keyword or hexixidecimal number for your text color:",
-    },
-    { //WHEN I am prompted for a shape...THEN I am presented with a list of shapes to choose from: circle, triangle, and square
-        type: "list",
-        name: "logoShape",
-        message: "Select your logo shape:",
-        choices: ["triangle", "square", "circle",]
-    },
-    {  // WHEN I am prompted for the shape's color. THEN I can enter a color keyword (OR a hexadecimal number)
-        type: "input",
-        name: "logoColor",
-        message: "Enter a color or hexidecimal number for your logo color:",
-    },
-]
-//WHEN I have entered input for all the prompts...THEN an SVG file is created named `logo.svg`
-function writetoFile(fileName, data) {
-    var content = generateLogo(data);
-    fs.writeFile(filenaame, content, function(error) {
-        if(error) {
-            return console.log(error);
-        };
-    });
-//AND the output text "Generated logo.svg" is printed in the command line.
-function init( {
-    inquirer.prompt(questions).then(function (data)) {
-        var fileName "logo.svg";
-        writetoFile(fileName, data);
-    });
+function init() {
+  inquirer.prompt(questions).then(function(data) {
+    const fileName = "logo.svg";
+    const shape = makeShape(data.logoShape);
+    shape.setColor(data.logoColor);
+    const svgContent = generateSVG(shape, data.text, data.textColor);
+    writeToFile(fileName, svgContent);
+  });
 }
-//function call to app
+
+function writeToFile(fileName, content) {
+  fs.writeFile(fileName, content, function(error) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Generated logo.svg");
+    }
+  });
+}
+
+function generateSVG(shape, text, textColor) {
+  const shapeRender = shape.render();
+  const svgContent = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+      ${shapeRender}
+      <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="${textColor}" font-size="48">
+        ${text}
+      </text>
+    </svg>
+  `;
+  return svgContent;
+}
+
+function makeShape(shapeType) {
+  switch (shapeType) {
+    case 'triangle':
+      return new Triangle();
+    case 'circle':
+      return new Circle();
+    case 'square':
+      return new Square();
+    default:
+      throw new Error(`Invalid shape type: ${shapeType}`);
+  }
+}
+
 init();
