@@ -1,8 +1,15 @@
 # Tutorial Video
 
+https://drive.google.com/file/d/1esYKRBDk55_wfy2Fp0oke78KRb28Bqid/view
+
 # Screenshot
 
-# Rep and Live
+<img src= "examples\logo.svg" alt = "svg file saying now">
+<img src= "assets\screenshotforgen.png" alt="picture of project">
+
+# Repo and Live
+
+https://github.com/Erazerlista/SVGLogoCreator
 
 # Link Ref
 
