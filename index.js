@@ -55,18 +55,18 @@ function generateSVG(shape, text, textColor) {
   let textPositionY = '';
 
   if (shape instanceof Triangle) {
-    textPositionX = '50%'; // Center horizontally for triangle shape
-    textPositionY = '40%'; // Center vertically for triangle shape
+    textPositionX = '50%'; // Center horizontally for triangle shape. 50/40
+    textPositionY = '40%'; // Center vertically for triangle shape.
   } else if (shape instanceof Circle) {
-    textPositionX = '35%'; // Center horizontally for circle shape
+    textPositionX = '35%'; // Center horizontally for circle shape. 35/53
     textPositionY = '53%'; // Center vertically for circle shape
   } else if (shape instanceof Square) {
-    textPositionX = '50%'; // Center horizontally for square shape
+    textPositionX = '50%'; // Center horizontally for square shape/ 50/50
     textPositionY = '50%'; // Center vertically for square shape
   }
 
-  const svgContent = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+  const svgContent = 
+  `<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
       ${shapeRender}
       <text x="${textPositionX}" y="${textPositionY}" dominant-baseline="middle" text-anchor="middle" fill="${textColor}" font-size="48">
         ${text}

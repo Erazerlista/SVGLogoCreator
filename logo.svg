@@ -1,8 +1,0 @@
-
-    <svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
-      <rect x="50" y="50" width="200" height="200" style="fill:blue"/>
-      <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="48">
-        dgf
-      </text>
-    </svg>
-  
