@@ -51,10 +51,24 @@ function writeToFile(fileName, content) {
 
 function generateSVG(shape, text, textColor) {
   const shapeRender = shape.render();
+  let textPositionX = '';
+  let textPositionY = '';
+
+  if (shape instanceof Triangle) {
+    textPositionX = '50%'; // Center horizontally for triangle shape
+    textPositionY = '40%'; // Center vertically for triangle shape
+  } else if (shape instanceof Circle) {
+    textPositionX = '35%'; // Center horizontally for circle shape
+    textPositionY = '53%'; // Center vertically for circle shape
+  } else if (shape instanceof Square) {
+    textPositionX = '50%'; // Center horizontally for square shape
+    textPositionY = '50%'; // Center vertically for square shape
+  }
+
   const svgContent = `
     <svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
       ${shapeRender}
-      <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="${textColor}" font-size="48">
+      <text x="${textPositionX}" y="${textPositionY}" dominant-baseline="middle" text-anchor="middle" fill="${textColor}" font-size="48">
         ${text}
       </text>
     </svg>
